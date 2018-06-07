@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <script src="javascript.js" ></script>
+    <title>Time table</title>
+    <script>getHolidays()</script>
+</head>
+<body>  
+	
+	
+    <header><h1>Time Table</h1></header>
+    <div>
+             /   <div id="changeweeksbutton">
+                    <ul>
+                        <li id="buttonright"><button id="buttonext" onclick="changeWeek(7)">Nästa vecka</button></li>
+                        <li id="buttonleft"><button id="buttonprev" onclick="changeWeek(-7)">Förgående vecka</button></li>
+                        <div id="monthyear"><li><h1 id="yeartext"></h1><br> <h1 id="monthtext"></h1></li></div>
+                        
+                    </ul>
+                    
+                </div> 
+        
+                <input type="text">
+    <table>
+        
+        <tr id="table-header">
+            <th id="row1"><h2 id="monday">Måndag</h2><p id="p0"></p></th>
+            <th id="row2" ><h2 id="tuesday">Tisdag</h2><p id="p1"></p></th>
+            <th id="row3"><h2 id="wednesday">Onsdag</h2><p id="p2"></p></th>
+            <th id="row4"><h2 id="thursday">Torsdag</h2><p id="p3"></p></th>
+            <th id="row5"><h2 id="friday">Fredag</h2><p id="p4"></p></th>
+            <th id="row6"><h2 id="saturday">Lördag</h2 ><p id="p5"></p></th>
+            <th id="row0"><h2 id="sunday">Söndag</h2><p id="p6"></p></th>
+         
+        </tr>
+        <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>A</th>
+        
+        </tr>
+        
+    </table>
+    </div>
+
+    <div>
+            
+            <p id="ptest"></p>
+            <script>mydate()</script>
+<footer>
+    <h1>Footer</h1>
+</footer>
+</div>
+</body>
+</html>

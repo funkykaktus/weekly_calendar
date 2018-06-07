@@ -1,0 +1,130 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.0;
+    padding: 0;
+    margin:0;
+    background-color:#f2f2f2;
+
+}
+
+header{
+    background: #3399ff;
+    color:#ffffff;
+    padding-top:10px;
+    min-height: 70px;
+    text-align: center;
+}
+h1{
+    line-height:1;
+}
+
+table th{
+    border-style: solid;
+    margin:10;
+    height: 50px;
+    padding:4px;       
+}
+table tr{
+    height: 250px;
+}
+table tr:hover{
+    
+}
+
+#table-header{  
+    background-color: #0066cc; 
+    height: 100px;     
+}
+
+#changeweeksbutton{
+    background-color:lightblue;
+    height: 70px; 
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#buttonleft{
+    float: left; 
+    padding: 15px;   
+}
+
+#buttonright{
+    float:right;
+    padding: 15px;
+}
+
+#yeartext{
+    display: inline;
+}
+#monthyear{
+    margin-left: 40%;
+    margin-right:30%;
+}
+#rowcurrent{
+    background-color: bisque;
+}
+
+#monthtext{
+    display: inline;
+}
+
+ul{
+    list-style: none;
+}
+
+#buttonext{
+    width: 150px;
+    height: 30px;
+}
+
+#buttonprev{
+    width: 150px;
+    height: 30px;
+}
+
+table{
+    width: 80%;    
+    border-collapse: collapse;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+table tr{
+    background-color: #e6e6e6;
+}
+
+footer{
+    padding: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+    text-align: center;
+    background-color:#3399ff;    
+}
+
+#sunday{
+    color: #ff4d4d;
+}
+p{
+    color:#ff4d4d;
+
+}
+
+@media(max-width:800px){
+    body{
+    background-color: aqua;
+}
+h2{
+    font-size:1.3em;
+
+}
+}
+
+@media(max-width:100px){
+    body{
+    background-color: blue;
+}
+h2{
+    font-size:1.1em;
+}
+}
