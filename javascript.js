@@ -128,7 +128,6 @@ function matchDate(dateMatch){
         return holidayList[stringDate];  
     }
     else{
-        //hej
         return "";
     }
 }
