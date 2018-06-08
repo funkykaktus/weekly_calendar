@@ -1,12 +1,13 @@
 var days=["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 var daysSwed=["Måndag","Tisdag","Onsdag","Torsdag","Fredag","Lördag","Söndag"]
 var startOnMonday={0:-6,1:0,2:-1,3:-2,4:-3,5:-4,6:-5}
-var newDate;
 var monthsSwed=["Januari","Februari","Mars","April","Maj","Juni","Juli","Augusti","September","Oktober","November","December",]
+var holidayList=[];
+var goodToKnowArray=[]
 var currentDay=false;
 var rowc;
-var holidayList=[];
 var today;
+var newDate;
 
 function myDate(){
     newDate=new Date();
@@ -52,31 +53,37 @@ function markTodaysDate(sendDate){
    }
 }
 
-function getJSONFile(){
+function getJSONFile(type){
     //Gets holidayfile as a json
+    
     var temp;
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4) {
                 temp=JSON.parse(this.responseText);
-                fillArrayWithHolidays(temp);
+                fillArrayWithHolidays(temp,type);
             }
             else{
                 myDate();
             }
  };
-        xmlhttp.open("GET", "jsontest.php", true);
+        xmlhttp.open("GET", "jsonfiles.php?type="+type, true);
         xmlhttp.send();       
 }
 
-function fillArrayWithHolidays(t){
+function fillArrayWithHolidays(jsonHoliday,typeArray){
     //Puts the json in array
-    var testarr=[];
-    testarr.push(t);
-    for (var i in testarr){
-        var temp=testarr[i];
-    for(ii in temp){
-        holidayList[temp[ii].date]=temp[ii].name;
+    var temparr=[];
+    temparr.push(jsonHoliday);
+    for (var i in temparr){
+        var temparr2=temparr[i];
+        for(ii in temparr2){
+            if(type="holidays"){
+                holidayList[temparr2[ii].date]=temparr2[ii].name;
+            }
+            else{
+                goodToKnowArray[temparr2[ii].date]=temparr2[ii].name;
+            }
     }
     myDate();
     }
@@ -101,8 +108,13 @@ function returnHolidayToCalendar(dateMatch){
     }
 
     //returns holiday
-    if(holidayList[stringDate]){
-        return holidayList[stringDate];  
+if(holidayList[stringDate] && goodToKnowArray[stringDate]){
+        return holidayList[stringDate]+ " "+goodToKnowArray[stringDate];
+          
+    }
+    else if(holidayList[stringDate] || goodToKnowArray[stringDate]){
+        return holidayList[stringDate];
+        return goodToKnowArray[stringDate];  
     }
     else{
         return "";
