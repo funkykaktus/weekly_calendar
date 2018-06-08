@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="javascript.js" ></script>
     <title>Time table</title>
-    <script>getJSONFile()</script>
+    
+    
 </head>
 <body>  
 	
@@ -16,8 +17,8 @@
     <div>
              /   <div id="changeweeksbutton">
                     <ul>
-                        <li id="buttonright"><button id="buttonext" onclick="changeWeek(7)">Nästa vecka</button></li>
-                        <li id="buttonleft"><button id="buttonprev" onclick="changeWeek(-7)">Förgående vecka</button></li>
+                        <li id="buttonright"><button id="buttonext" onclick="getWeek(7)">Nästa vecka</button></li>
+                        <li id="buttonleft"><button id="buttonprev" onclick="getWeek(-7)">Förgående vecka</button></li>
                         <div id="monthyear"><li><h1 id="yeartext"></h1><br> <h1 id="monthtext"></h1></li></div>
                         
                     </ul>
@@ -53,8 +54,8 @@
 
     <div>
             
-            <p id="ptest"></p>
-            <script>currentWeek()</script>
+        <script>getJSONFile()</script>
+            
 <footer>
     <h1>Footer</h1>
 </footer>

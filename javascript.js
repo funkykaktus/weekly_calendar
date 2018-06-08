@@ -6,39 +6,25 @@ var monthsSwed=["Januari","Februari","Mars","April","Maj","Juni","Juli","Augusti
 var currentDay=false;
 var rowc;
 var holidayList=[];
+var today;
 
-//get the current weeks date 
-function currentWeek(){
-    
+function myDate(){
     newDate=new Date();
-    var today=newDate.getFullYear()+""+(newDate.getMonth()+1)+newDate.getDate();
-    document.getElementById("yeartext").innerHTML=newDate.getFullYear();
+    today=newDate.getFullYear()+""+(newDate.getMonth()+1)+newDate.getDate();
+    getWeek(0);
+}
 
-    //Start the calender from monday
-    newDate.setDate(newDate.getDate()+startOnMonday[newDate.getDay()]);
+function getWeek(changeWeek){
     
-    for(var i=0; i<7;i++){   
-        markTodaysDate(newDate, today);
-        document.getElementById("p"+i).innerHTML=returnHolidayToCalendar(newDate);
-        document.getElementById(days[i]).innerHTML=daysSwed[i]+"<br>"+(newDate.getDate())+"/"+(newDate.getMonth()+1);			
-        newDate.setDate(newDate.getDate()+1);
-        }
-    document.getElementById("monthtext").innerHTML=monthsSwed[newDate.getMonth()];
-    //move calender back 7 week because we moved the calender forward in the for loop
-    newDate.setDate(newDate.getDate()-7);
-    }
-
-function changeWeek(week){
-    
-    //Change the calender to previous/next week
-    newDate.setDate(newDate.getDate()+week);
+    //Change the calender to previous/next or get the week
+    newDate.setDate(newDate.getDate()+changeWeek);
     var stringDate;
     //Start the calender on a monday
     newDate.setDate(newDate.getDate()+startOnMonday[newDate.getDay()]);
 
+    //Prints the date
     for(var i=0; i<7;i++){
-        markTodaysDate(newDate,i);
-            
+        markTodaysDate(newDate);
         document.getElementById("p"+i).innerHTML=returnHolidayToCalendar(newDate);    
         document.getElementById(days[i]).innerHTML=daysSwed[i]+"<br>"+((newDate.getDate()))+"/"+(newDate.getMonth()+1);
         newDate.setDate(newDate.getDate()+1);		         
@@ -51,36 +37,40 @@ function changeWeek(week){
 }
 
 
-function markTodaysDate(todayDateFun,today){
-    td=todayDateFun.getFullYear()+""+(todayDateFun.getMonth()+1)+todayDateFun.getDate();
-
+function markTodaysDate(sendDate){
+    //Marks out todays date in the calendar
+    td=sendDate.getFullYear()+""+(sendDate.getMonth()+1)+sendDate.getDate();
 
    if(td==today && currentDay==false){
-       document.getElementById("row"+todayDateFun.getDay()).setAttribute("id","rowcurrent");
+       document.getElementById("row"+sendDate.getDay()).setAttribute("id","rowcurrent");
        currentDay=true;
-       rowc=todayDateFun.getDay();
+       rowc=sendDate.getDay();
    }
-   else if(rowc==todayDateFun.getDay() && today!=td && currentDay==true){    
+   else if(rowc==sendDate.getDay() && today!=td && currentDay==true){    
        currentDay=false;
        document.getElementById("rowcurrent").setAttribute("id","row"+rowc);
    }
 }
 
 function getJSONFile(){
-    
+    //Gets holidayfile as a json
     var temp;
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 ) {
+            if (this.readyState == 4) {
                 temp=JSON.parse(this.responseText);
                 fillArrayWithHolidays(temp);
             }
+            else{
+                myDate();
+            }
  };
-        xmlhttp.open("GET", "jsontest.php?q=" +"d", true);
-        xmlhttp.send();
+        xmlhttp.open("GET", "jsontest.php", true);
+        xmlhttp.send();       
 }
 
 function fillArrayWithHolidays(t){
+    //Puts the json in array
     var testarr=[];
     testarr.push(t);
     for (var i in testarr){
@@ -88,15 +78,15 @@ function fillArrayWithHolidays(t){
     for(ii in temp){
         holidayList[temp[ii].date]=temp[ii].name;
     }
-    currentWeek();
-}
+    myDate();
+    }
 }
 
 
 function returnHolidayToCalendar(dateMatch){
+    //Change the date string to match the json date string
     var stringDate;
 
-    //Change the date string to match the json date string
     if((dateMatch.getMonth()+1)<10 && dateMatch.getDate()<10){
         stringDate=dateMatch.getFullYear()+"-"+"0"+(dateMatch.getMonth()+1)+"-0"+dateMatch.getDate();    
     }
@@ -118,13 +108,3 @@ function returnHolidayToCalendar(dateMatch){
         return "";
     }
 }
-
-
-
-
-
-
-
-
-
-
