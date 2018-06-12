@@ -28,9 +28,7 @@ table th{
 table tr{
     height: 250px;
 }
-table tr:hover{
-    
-}
+
 
 #table-header{  
     background-color: #0066cc; 
