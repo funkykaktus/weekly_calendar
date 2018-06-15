@@ -8,12 +8,14 @@ var employes=[]
 var currentDay=false;
 var rowc;
 var today;
-var newDate; 
+var newDate;
+
 
 function myDate(){
     newDate=new Date();
     today=newDate.getFullYear()+""+(newDate.getMonth()+1)+newDate.getDate();
     getWeek(0);
+    newPopWindow();   
 }
 
 function getWeek(changeWeek){
@@ -24,35 +26,26 @@ function getWeek(changeWeek){
     var monday=startOnMonday[newDate.getDay()];
     newDate.setDate(newDate.getDate()+monday);
 
-    
-
-
     //Prints the date
     for(var i=0; i<7;i++){
         
         //deletes the old database info from table
         document.getElementById("th"+i).innerHTML="";
-
         markTodaysDate(newDate);
+        
     
         var getHolidays=returnHolidayToCalendar(newDate);
         document.getElementById("p"+i).innerHTML=getHolidays;   
-        
-        var getDayinSwedish=daysSwed[i]; 
-        var getDate=newDate.getDate();
-        var getMonth=newDate.getMonth()+1;
-        document.getElementById(days[i]).innerHTML=getDayinSwedish+"<br>"+getDate+"/"+getMonth;
-        
+        document.getElementById(days[i]).innerHTML=daysSwed[i]+"<br>"+(newDate.getDate())+"/"+(newDate.getMonth()+1);	
         database(newDate,i);
        
-        newDate.setDate(getDate+1);	  	         
+        newDate.setDate(newDate.getDate()+1);	  	         
     }
     
-
     document.getElementById("yeartext").innerHTML=newDate.getFullYear();
     document.getElementById("monthtext").innerHTML=monthsSwed[newDate.getMonth()];
-    //Move the date back 6 days because we moved the date forward 6 days in the for loop
-    newDate.setDate(getDate-6);
+    //Move the date back 7 days because we moved the date forward 7 days in the for loop
+    newDate.setDate(newDate.getDate()-7);
 }
 
 
@@ -158,18 +151,51 @@ function returnHolidayToCalendar(dateMatch){
 function database(dateMatch,tableTH){
     //Change the date string to match the json date string
     var stringDate=convertDate(dateMatch);
-    
-    for(var f=0;f<employes.length;f++){
-        try{
+    var sortedData= employes.sort((function (a, b) { 
+        var t1=new Date(a.datetable+' '+a.starttime);
+        var t2=new Date(b.datetable+' '+b.starttime);
+        return t1<t2 ?-1: t1>t2 ?1:0;
+      }));
+   
+   for(var f=0;f<employes.length;f++){
+        
         if(employes[f].datetable==stringDate){
             var emplyoesName=employes[f].name;
             var emplyoesStarttime=employes[f].starttime;
             var emplyoesEndtime=employes[f].endtime;
-            var emplyoesDate=employes[f].datetable;
-            document.getElementById("th"+tableTH).innerHTML+=emplyoesName+" "+emplyoesStarttime+"-"+emplyoesEndtime+"-"+emplyoesDate+"<br>";
+            var emplyoesDate="";//employes[f].datetable;
+            document.getElementById("th"+tableTH).innerHTML+="<section>"+emplyoesName+" "+emplyoesStarttime.slice(0,-3)+"-"+emplyoesEndtime.slice(0,-3)+emplyoesDate+"</section>";
         }
-
-    }catch(err){
-    }   
+      
     }
+}
+
+
+function newPopWindow(){
+   
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 }
