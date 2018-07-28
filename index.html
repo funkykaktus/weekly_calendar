@@ -39,13 +39,13 @@
          
         </tr>
         <tr>
-            <th id="th0">A</th>
-            <th id="th1">B</th>
-            <th id="th2">C</th>
-            <th id="th3">D</th>
-            <th id="th4">E</th>
-            <th id="th5">F</th>
-            <th id="th6">G</th>
+            <th id="th0"></th>
+            <th id="th1"></th>
+            <th id="th2"></th>
+            <th id="th3"></th>
+            <th id="th4"></th>
+            <th id="th5"></th>
+            <th id="th6"></th>
         
         </tr>
         
@@ -57,11 +57,11 @@
     <div id="myModal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <form action="">
-              <p>Name</p><input type="text">
-              <p>Date</p><input type="date">
-              <p>Starting Time</p><input type="time">
-              <p>Ending Time</p><input type="time">
+              <form action="AddToDatabase.php" method="post">
+              <p>Name</p><input type="text" name="name">
+              <p>Date</p><input type="date" name=date>
+              <p>Starting Time</p><input type="time" name="startTime">
+              <p>Ending Time</p><input type="time" name="endTime">
               <input type="submit">
             </form>
             </div>

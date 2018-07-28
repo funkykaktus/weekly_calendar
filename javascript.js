@@ -15,7 +15,7 @@ function myDate(){
     newDate=new Date();
     today=newDate.getFullYear()+""+(newDate.getMonth()+1)+newDate.getDate();
     getWeek(0);
-    newPopWindow();   
+    //newPopWindow();   
 }
 
 function getWeek(changeWeek){

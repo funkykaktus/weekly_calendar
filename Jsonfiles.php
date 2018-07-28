@@ -13,16 +13,12 @@
 
 		
 	}else if($q=="database"){
-
-
 	
-	$dbservername='localhost';
-$dbUsername="root";
-$dbpassword="";
-$dbName="timetable_users";
-$charset="utf8mb4";
-$date1="2018-06-01";
-$date2="2019-06-20";
+		$dbservername='localhost';
+		$dbUsername="root";
+		$dbpassword="";
+		$dbName="timetable_users";
+		$charset="utf8mb4";
 
 
 try{
@@ -30,15 +26,9 @@ try{
     $pdo=new PDO($db,$dbUsername,$dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     //return $pdo;
-    $pdotest=$pdo->query("SELECT * FROM timetable where datetable BETWEEN  '$date1' AND '$date2';");
+    $pdotest=$pdo->query("SELECT * FROM timetable where datetable;");
 
     while($row=$pdotest->fetch()){
-       /* $uid=$row['name'];
-        $uid1=$row['starttime'];
-        $uid2=$row['endtime'];
-		$uid3=$row['datetable'];
-		$a=$uid.$uid1.$uid2.$uid3;
-*/
 		$to_encode[]=$row;
 	}
 	echo (json_encode($to_encode));
